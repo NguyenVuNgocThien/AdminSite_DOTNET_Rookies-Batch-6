@@ -3,6 +3,8 @@ import API, { endpoint } from "../API/API";
 import { useDispatch, useSelector } from "react-redux";
 import cookie from 'react-cookies';
 import { logoutUser } from "../actioncreators/UserCreator";
+import { Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export function Header(){
     
@@ -10,6 +12,8 @@ export function Header(){
       const dispatch=useDispatch();
       const signout=()=>{
           cookie.remove('user');
+          cookie.remove('accessToken');
+          cookie.remove('refreshToken')
           dispatch(logoutUser())
       }
       let path =<a className="nav-link" href="http://localhost:3000/login"><i className="fa-solid fa-user"></i>Sign in<span className="sr-only"></span></a>
@@ -21,17 +25,17 @@ export function Header(){
         return (
             <>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <a className="navbar-brand" href="http://localhost:3000/">Navbar</a>
+  <Link to="/"><Image src="../images/logo.jpg"></Image></Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse " id="navbarNav" >
     <ul className="navbar-nav">
       <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+        <a className="nav-link" href="http://localhost:3000/category">Category Management </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Pricing</a>
+        <a className="nav-link" href="http://localhost:3000/customer">Customers Management</a>
       </li>
       <li>
         {path}

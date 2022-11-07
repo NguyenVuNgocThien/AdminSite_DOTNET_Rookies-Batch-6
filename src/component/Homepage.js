@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router";
+import { Link } from "react-router-dom";
 import API, { endpoint } from "../API/API";
-import Header from "../layouts/Header"
-import {ListSP} from "./ListSP";
+import {ListProduct} from "./ListProduct";
 
 export function Home(){
         const [sanpham,setSanpham]=useState([])
@@ -25,8 +24,10 @@ export function Home(){
                 <>{(user == null && user==undefined)?<h1>Bạn Chưa Đăng Nhập</h1>:
                 <>
                         <h1>Danh Sách Sản Phẩm</h1>
+                        <Link to="/createproduct"><Button variant="success" >Thêm SP mới</Button></Link>
+                        <h1></h1>
                         <Row>
-                                {sanpham.map(s=><ListSP obj={s}/>)}
+                                {sanpham.map(s=><ListProduct obj={s}/>)}
                         </Row>
                         </>
                 }

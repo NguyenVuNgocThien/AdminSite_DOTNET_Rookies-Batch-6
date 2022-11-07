@@ -1,27 +1,27 @@
 import {  Button, Card, Col} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import API, { endpoint } from "../API/API";
-import './ListSP.scss'
+import './ListProduct.scss'
 
-export  function ListSP(props){
-    const linkimg="../"+props.obj.hinhSp
+export  function ListProduct(props){
+    const linkimg=props.obj.hinhSp
     let path=`/manage/${props.obj.maSp}`
     const negative=useNavigate()
     const handleDel=()=>{
        API.delete(endpoint['XoaSP'](props.obj.maSp)).then(res=>{
-        console.info(props.obj.maSp)
+        console.info(res)
             try{
-              if(res.data==null){
+              if(res.status==204){
                 alert('Xóa Thành Công')
-                negative('/')
+                window.location.reload(false)
               }
-              else
+              else if(res.status==200)
               {
                 alert('Sản Phẩm có trong giỏ hàng hoặc hóa đơn đã lập')
               }
             }
             catch(err){
-              console.error(err)
+
             }
        })
     }
@@ -35,7 +35,7 @@ export  function ListSP(props){
         <Card.Title>Đơn vị tính: {props.obj.donvitinh}</Card.Title>
         <Card.Title>Đơn giá: {props.obj.dongia}</Card.Title>
         <Card.Title>Ngày tạo:{props.obj.ngayTao}</Card.Title>
-        <Card.Title>Ngày cập nhật:{props.obj.ngayTao}</Card.Title>
+        <Card.Title>Ngày cập nhật:{props.obj.ngayCapNhat}</Card.Title>
         <Link to={path}><Button>Chỉnh sửa</Button></Link>
         <Button variant="danger" onClick={handleDel}>Xóa SP</Button>
       </Card.Body>

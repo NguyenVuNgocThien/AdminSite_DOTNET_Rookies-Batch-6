@@ -3,9 +3,9 @@ import { useState } from "react"
 import { Row } from "react-bootstrap"
 import { useParams } from "react-router"
 import API, { endpoint } from "../API/API"
-import { ManageProduct } from "./ManageProduct"
+import { PutProduct } from "./PutProduct"
 
-export function SP(){
+export function Product(){
     const [sanpham,setsanpham]=useState([])
     const {maSp}=useParams()
     useEffect(()=>{
@@ -25,7 +25,7 @@ export function SP(){
         <>
             <h1>Chi Tiet SP</h1>
             <Row>
-                                <ManageProduct obj={sanpham}/>
+                                <PutProduct obj={sanpham}/>
                         </Row>
         </>
     )

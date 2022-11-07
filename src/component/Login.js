@@ -22,15 +22,16 @@ export  function Login(){
             matKhau:password
         }
         API.post(endpoint['Login'],login).then(res=>{
+            console.info(res.data.accessToken)
+            cookie.save("accessToken",res.data.accessToken)
+            cookie.save("refreshToken",res.data.refreshToken)
             setSuccess(res.data.success);
                 API.get(endpoint['TaiKhoanDangNhaps']+`/${username}`).then(response=>{
                     setPermissonCode(response.data.maQuyen);
                 let user=response.data;
-                localStorage.setItem("user",user);
                 cookie.save('user',user);
                 dispatch(loginUser(user))
                 history('/');
-                console.info(user);
         })
         })
     }

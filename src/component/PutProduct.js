@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Button,  Col, Form, Image} from "react-bootstrap";
 import { useNavigate } from "react-router";
 import API, { endpoint } from "../API/API";
-import './ListSP.scss'
+import './ListProduct.scss'
 
-export  function ManageProduct(props){
-    const linkimg="../"+props.obj.hinhSp
+export  function PutProduct(props){
+    const linkimg=props.obj.hinhSp
     const [listLoaiSP,setListLoaiSP]=useState([])
     const [productName,setProductName]=useState()
     const [price,setPrice]=useState()
@@ -77,6 +77,7 @@ export  function ManageProduct(props){
                 <Form.Group>
                     <Form.Label>Loại Sản Phẩm</Form.Label>
                     <Form.Select onChange={(event)=>setLoaiSP(event.target.value)}>
+                        <option>Chọn</option>
                         {listLoaiSP.map(l=>{
                             return <option key={l.maLoaiSp} value={l.maLoaiSp} >{l.tenLoaiSp}</option>
                         })}
